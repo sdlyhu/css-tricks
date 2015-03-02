@@ -1,7 +1,3 @@
 # css-tricks
 
-***
-
-## Tick List
-
-* Perfect Full Page Background Image [Tutorial]() [Code]()
+* Perfect Full Page Background Image [Tutorial](/full-page-background-image/README.md) [Code]()
