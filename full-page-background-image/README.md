@@ -121,8 +121,6 @@ html {
 
 任何人试图使用上述IE过滤器和有问题的滚动条或死链接或任何其他（如以上）问题，应尽量不在HTML或body元素上使用他们，而是用 `100％的宽度和高度的固定位置的div`。
 
-教程剩余的部分：
-
 ### CSS-Only Technique #1
 
 
@@ -165,7 +163,7 @@ img.bg {
 * IE 7/8: Mostly works, doesn't center at small sizes but fills screen fine
 * IE 9: Works
 
-`HTML` 文件在地址[这里]()
+`HTML` 文件在地址[这里](https://github.com/JobsLong/css-tricks/blob/master/full-page-background-image/css-1.html)
 
 ### CSS-Only Technique #2
 
@@ -229,8 +227,128 @@ IE 8+
 * Opera (any version) and IE both fail in the same way (wrongly positioned, not sure why)
 * Peter VanWylen wrote in to say that if you add the image via JavaScript, the img needs to have width: auto; and height: auto; to work in IE 8, 9, or 10.
 
-HTML 文件在[这里]()
+HTML 文件在[这里](https://github.com/JobsLong/css-tricks/blob/master/full-page-background-image/css-2.html)
+
 ### jQuery Method
+
+如果我们知道图片以及浏览器窗口的高宽比例，那么实现这个效果会变得非常容易（从CSS的角度来看）。如果图片的宽高比小于浏览器的，那么就只需要将图片的 `width` 设置为 `100%`，然后图片就会填充满整个窗口，反之，则需要将 `height` 设置为 `100%`;
+
+我们完全可以通过 `Javascript` 来实现这个想法；我更喜欢用 `jQuery` 来实现；
+
+`HTML` 代码：
+
+```
+<img src="image/bg.jpg" id="bg" alt="">
+```
+
+`CSS` 代码:
+
+```
+#bg { position: fixed; top: 0; left: 0; }
+.bgwidth { width: 100%; }
+.bgheight { height: 100%; }
+```
+
+`Javascript` 代码：
+
+```
+$(window).load(function() {
+	var theWindow = $(window);
+	var $bg = $('#bg');
+	var aspectRatio = $bg.width() / $bg.height();
+
+	function resizeBg() {
+		if(theWindow.width() / theWindow.height() < aspectRatio) {
+			$bg
+				.removeClass()
+				.addClass('bgheight');
+		} else {
+			$bg
+				.removeClass()
+				.addClass('bgwidth');
+		}
+	}
+
+	theWindow.resize(resizeBg).trigger('resize');
+});
+```
+
+浏览器兼容性：
+
+* IE7+ (could probably get in IE6 with a fixed position shim)
+* Most any other desktop browser
+
+`更新部分（2012年7月）：` Reader Craig Manley says: 可以根据屏幕尺寸去加载合适的背景图片。就是说，不要尝试为iPhone加载一个1900px尺寸的图片。
+
+首先你需要制作类似 1024.jpg,1280.jpg,160,jpg等一系列的资源文件，然后去加载一个 `shim` 而不是 `img`;
+
+`HTML` 代码：
+
+```
+<img id="bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" style="position: fixed; left: 0; top: 0" />
+```
+
+如果你不喜欢 gif shim（原教程作者说还ok啦，毕竟这个元素不是`content`, 而仅仅是一个背景而已），你也可以去加载一个真实的图片来替代它，这段代码就是为了实现这个方案。
+
+下面这段代码，就是根据屏幕宽度去加载不同src属性值。如果你觉得这段代码有用，可以浏览一下：
+
+`jQuery` 代码：
+
+```
+(function() {
+
+var win = $(window);
+
+win.resize(function() {
+    
+    var win_w = win.width(),
+        win_h = win.height(),
+        $bg    = $("#bg");
+
+    // Load narrowest background image based on 
+    // viewport width, but never load anything narrower 
+    // that what's already loaded if anything.
+    var available = [
+      1024, 1280, 1366,
+      1400, 1680, 1920,
+      2560, 3840, 4860
+    ];
+
+    var current = $bg.attr('src').match(/([0-9]+)/) ? RegExp.$1 : null;
+    
+    if (!current || ((current < win_w) && (current < available[available.length - 1]))) {
+      
+      var chosen = available[available.length - 1];
+      
+      for (var i=0; i<available.length; i++) {
+        if (available[i] >= win_w) {
+          chosen = available[i];
+          break;
+        }
+      }
+      
+      // Set the new image
+      $bg.attr('src', '/img/bg/' + chosen + '.jpg');
+      
+      // for testing...
+      // console.log('Chosen background: ' + chosen);
+      
+    }
+
+    // Determine whether width or height should be 100%
+    if ((win_w / win_h) < ($bg.width() / $bg.height())) {
+      $bg.css({height: '100%', width: 'auto'});
+    } else {
+      $bg.css({width: '100%', height: 'auto'});
+    }
+    
+  }).resize();
+  
+})(jQuery);
+```
+需要注意的是屏幕尺寸并不一定是更改背景图片很好的一个依据，可以看一下[这篇文章](https://css-tricks.com/which-responsive-images-solution-should-you-use/)
+
+`HTML` 文件在[这里]()
 
 *** 
 
