@@ -124,6 +124,49 @@ html {
 教程剩余的部分：
 
 ### CSS-Only Technique #1
+
+
+非常感谢 [Doug Neiger](http://dougneiner.com/) 提供的实现版本。在这块内容中我们使用单行的 `<img>` 元素，他可以在任何浏览器内调整尺寸。为了让它垂直填充满整个浏览器窗口，我们需要设置一下 `min-height` 属性, 设置 `width:100%`让它填充水平方向。我们还需要设置一下 `min-width`, 这样图片就永远不会小于它实际的尺寸了。
+
+
+需要特别说明的是，这种实现需要使用 `media` 查询去检测浏览器窗口是否比图片小，然后使用precentage-left和left margin组合来使图片始终保持居中；
+
+先看一下 `CSS` 代码：
+
+```
+img.bg {
+  /* Set rules to fill background */
+  min-height: 100%;
+  min-width: 1024px;
+	
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+	
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+@media screen and (max-width: 1024px) { /* Specific to this particular image */
+  img.bg {
+    left: 50%;
+    margin-left: -512px;   /* 50% */
+  }
+}
+
+```
+
+浏览器兼容：
+
+* Any version of good browsers: Safari / Chrome / Opera / Firefox
+* IE 6: Borked - but probably fixable if you use some kind of fixed positioning shim
+* IE 7/8: Mostly works, doesn't center at small sizes but fills screen fine
+* IE 9: Works
+
+`HTML` 文件在地址[这里]()
+
 ### CSS-Only Technique #2
 ### jQuery Method
 
