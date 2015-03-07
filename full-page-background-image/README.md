@@ -346,9 +346,17 @@ win.resize(function() {
   
 })(jQuery);
 ```
-需要注意的是屏幕尺寸并不一定是更改背景图片很好的一个依据，可以看一下[这篇文章](https://css-tricks.com/which-responsive-images-solution-should-you-use/)
+需要注意的是屏幕尺寸并不一定是更改背景图片很好的一个依据，可以看一下[这篇文章](https://css-tricks.com/which-responsive-images-solution-should-you-use/).
 
-`HTML` 文件在[这里]()
+`HTML` 文件在[这里](https://github.com/JobsLong/css-tricks/blob/master/full-page-background-image/jquery.html)
+
+### 其他资源: 
+
+jQuery 有些不错的插件也可以实现这个效果：
+
+1. [Vegas](http://vegas.jaysalvat.com/), by Jay Salvat
+2. [Supersized](http://www.buildinternet.com/project/supersized/)
+
 
 *** 
 
