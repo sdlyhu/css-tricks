@@ -168,6 +168,68 @@ img.bg {
 `HTML` 文件在地址[这里]()
 
 ### CSS-Only Technique #2
+
+另外一种更简单的方式是，让背景图片位置固定在左上角，然后设置一下 `min-width` 和 `min-height` 为 `100%` 来保持一图片的比例大小，看代码：
+
+`CSS` 代码：
+
+```
+img.bg {
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	/* Preserve aspet ratio */
+	min-width: 100%;
+	min-height: 100%;
+}
+```
+
+但是这种实现方案并不能满足我们的需求，我们需要图片居中显示。我们可以通过把图片丢到一个 `div` 里面来解决这个问题。修改一下之前的 `HTML` 文件。
+
+`HTML` 代码:
+
+```
+<div id="bg">
+  <img src="image/bg.jpg" alt="">
+</div>
+```
+
+展示一点小tricks：
+
+`CSS` 代码：
+
+```
+  #bg {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+  }
+
+  #bg img {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    margin: auto; 
+    min-width: 50%;
+    min-height: 50%;
+  }
+```
+
+感谢[Corey Worrell](http://coreyworrell.com/)提供这种实现方案;
+
+浏览器兼容：
+
+* Safari / Chrome / Firefox (didn't test very far back, but recent versions are fine)
+IE 8+
+* Opera (any version) and IE both fail in the same way (wrongly positioned, not sure why)
+* Peter VanWylen wrote in to say that if you add the image via JavaScript, the img needs to have width: auto; and height: auto; to work in IE 8, 9, or 10.
+
+HTML 文件在[这里]()
 ### jQuery Method
 
 *** 
