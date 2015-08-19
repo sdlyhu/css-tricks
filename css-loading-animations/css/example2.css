@@ -1,0 +1,21 @@
+.spinner {
+	/* Size and position */
+	font-size: 100px;
+	width: 1em;
+	height: 1em;
+	position: relative;
+	margin: 100px auto;
+
+	/* Styles */
+	border-radius: 50%;
+	background: #FF4F72;
+	background: 
+		linear-gradient(#ea2d0e 50%, #fcd883 50%),
+		linear-gradient(#fcd883 50%, #ea2d0e 50%);
+	background-position: 
+		0 0,
+		100% 0;
+	background-size: 50% 100%;
+	background-repeat: no-repeat;
+	
+}
