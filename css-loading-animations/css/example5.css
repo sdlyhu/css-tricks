@@ -1,0 +1,149 @@
+@import "app.css";
+
+body {
+    background-image: url(../images/az_subtle.png);
+}
+
+.pre-loader {
+	/* Size and position */
+	font-size: 30px;
+	width: 1em;
+	height: 1em;
+	position: relative;
+	margin: 100px auto;
+
+	/* Styles */
+	border-radius: 50%;
+	background: #123456;
+	transform-origin: 50% 250%;
+	animation:
+		blink 1s steps(1, start) infinite,
+		counter-clock 8s linear infinite;
+
+	/* Dots, clockwise */
+	box-shadow: 
+		1em 1em #123456,
+		2em 2em #123456,
+		1em 3em #123456,
+		0em 4em #123456,
+		-1em 3em #123456,
+		-2em 2em #123456,
+		-1em 1em #123456;
+}
+
+.pre-loader:after {
+	/* Size and position */
+	content: "";
+	width: 3em;
+	height: 3em;
+	position: absolute;
+	left: -1em;
+	top: 1em;
+
+	/* Styles */
+	transform: rotate(45deg);
+	background: white;
+	background: rgba(255, 255, 255, 0.6);
+}
+
+@keyframes counter-clock {
+	to { transform: rotate(-360deg); }
+}
+
+@keyframes blink {
+    12.5% {
+    background: rgba(18,52,86,0.6); 
+    box-shadow:
+       1em 1em #123456,
+       2em 2em #123456,
+       1em 3em #123456,
+       0em 4em #123456,
+      -1em 3em #123456,
+      -2em 2em #123456,
+      -1em 1em #123456;
+    }
+
+    25% {
+    background: #123456;
+    box-shadow:
+       1em 1em rgba(18,52,86,0.6),
+       2em 2em #123456,
+       1em 3em #123456,
+       0em 4em #123456,
+      -1em 3em #123456,
+      -2em 2em #123456,
+      -1em 1em #123456;
+    }
+
+    37.5% {
+    background: #123456;
+    box-shadow:
+       1em 1em #123456,
+       2em 2em rgba(18,52,86,0.6),
+       1em 3em #123456,
+       0em 4em #123456,
+      -1em 3em #123456,
+      -2em 2em #123456,
+      -1em 1em #123456;
+    }
+
+    50% {
+    background: #123456;
+    box-shadow:
+      1em 1em #123456,
+      2em 2em #123456,
+      1em 3em rgba(18,52,86,0.6),
+      0em 4em #123456,
+      -1em 3em #123456,
+      -2em 2em #123456,
+      -1em 1em #123456;
+    }
+
+    62.5% {
+    background: #123456;
+    box-shadow:
+       1em 1em #123456,
+       2em 2em #123456,
+       1em 3em #123456,
+       0em 4em rgba(18,52,86,0.6),
+      -1em 3em #123456,
+      -2em 2em #123456,
+      -1em 1em #123456;
+    }
+
+    75% {
+    background: #123456;
+      box-shadow:
+       1em 1em #123456,
+       2em 2em #123456,
+       1em 3em #123456,
+       0em 4em #123456,
+      -1em 3em rgba(18,52,86,0.6),
+      -2em 2em #123456,
+      -1em 1em #123456;
+    }
+
+    87.5% {
+    background: #123456;
+    box-shadow:
+       1em 1em #123456,
+       2em 2em #123456,
+       1em 3em #123456,
+       0em 4em #123456,
+      -1em 3em #123456,
+      -2em 2em rgba(18,52,86,0.6),
+      -1em 1em #123456;
+    }
+  
+    100% {
+    background: #123456;
+    box-shadow:
+       1em 1em #123456,
+       2em 2em #123456,
+       1em 3em #123456,
+       0em 4em #123456,
+      -1em 3em #123456,
+      -2em 2em #123456,
+      -1em 1em rgba(18,52,86,0.6);
+    }
+}
